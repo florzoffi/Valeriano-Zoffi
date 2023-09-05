@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Queue<T> {
     private List<T> elements;
-
     public static String QueueEmpty = "Queue is empty";
 
     public Queue() {
@@ -18,7 +17,7 @@ public class Queue<T> {
 
     public Queue<T> add(T cargo) {
         if (elements.contains(cargo)) {
-            throw new RuntimeException("Duplicate element not allowed");
+            throw new Error("Duplicate element not allowed");
         }
 
         elements.add(cargo);
@@ -27,7 +26,7 @@ public class Queue<T> {
 
     public T take() {
         if (isEmpty()) {
-            throw new RuntimeException(QueueEmpty);
+            throw new Error(QueueEmpty);
         }
 
         T cargo = elements.remove(0);
@@ -38,7 +37,7 @@ public class Queue<T> {
         try {
             return elements.get(0);
         } catch (IndexOutOfBoundsException e) {
-            throw new RuntimeException(QueueEmpty);
+            throw new Error(QueueEmpty);
         }
     }
 
