@@ -2,15 +2,20 @@ package queue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Queue {
     public List<Object> elements;
-    public static String QueueEmpty = "Queue is empty";
+    public String QueueEmpty = "Queue is empty";
     private QueueIntervention intervention;
+    public Deque<QueueIntervention> stateHistory;
 
     public Queue() {
         elements = new ArrayList<>();
         intervention = new TEmpty(this);
+        stateHistory = new ArrayDeque<>();
+        stateHistory.push(intervention);
     }
 
     public boolean isEmpty() {
@@ -18,20 +23,17 @@ public class Queue {
     }
 
     public Queue add(Object cargo) {
-        if (elements.contains(cargo)) {
-            throw new Error("Duplicate element not allowed");
-        }
-
-        elements.add(cargo);
+    	elements.add(cargo);
         intervention = new FEmpty(this);
+        stateHistory.push(intervention);
         return this;
     }
 
     public Object take() {
-    	if (size()<= 0) {
-    		intervention = new TEmpty(this);
-    	}
-        return intervention.take();
+    	intervention.take();
+    	stateHistory.pop();
+    	intervention = stateHistory.peek();
+        return this;
     }
 
     public Object head() {
