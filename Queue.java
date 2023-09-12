@@ -30,10 +30,10 @@ public class Queue {
     }
 
     public Object take() {
-    	intervention.take();
+    	Object item = intervention.take();
     	stateHistory.pop();
     	intervention = stateHistory.peek();
-        return this;
+        return item;
     }
 
     public Object head() {
