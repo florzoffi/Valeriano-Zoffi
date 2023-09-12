@@ -8,8 +8,7 @@ public class FEmpty extends QueueIntervention {
     
     @Override
     public Object take() {
-        Object cargo = queue.elements.remove(0);
-        return cargo;
+        return queue.elements.remove(0);
     }
 
     @Override
