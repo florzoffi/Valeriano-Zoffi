@@ -1,9 +1,10 @@
 package queue;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.Test;
 
 public class QueueTest {
@@ -57,17 +58,17 @@ public class QueueTest {
   }
   
   @Test public void test10CanNotTakeWhenThereAreNoObjectsInTheQueue() {
-	  assertTrue( assertThrows( Error.class,() -> emptyQueue().take() ).getMessage().equals( Queue.QueueEmpty ));
+	  assertThrowsLike( () -> emptyQueue().take());
   }
-  
+ 
 @Test public void test09CanNotTakeWhenThereAreNoObjectsInTheQueueAndTheQueueHadObjects() {
     Queue queue = queueWithSomething();
     queue.take();
-    assertTrue( assertThrows( Error.class, ()-> queue.take() ).getMessage().equals( Queue.QueueEmpty  ) );
+    assertThrowsLike(()-> queue.take());
   }
 
   @Test public void test10CanNotHeadWhenThereAreNoObjectsInTheQueue() {
-	  assertTrue( assertThrows( Error.class, ()-> emptyQueue().head() ).getMessage().equals( Queue.QueueEmpty ) );
+	  assertThrowsLike(()-> emptyQueue().head());
   }
   
   private Queue queueWithSomething() {
@@ -79,4 +80,7 @@ public class QueueTest {
   private Queue queueWithTwoElements() {
 		return emptyQueue().add( firstElement ).add( secondElement );
 	}
+  private void assertThrowsLike( Executable e ) {
+	  assertEquals( Queue.QueueEmpty , assertThrows( Error.class, e ).getMessage() );
+	  }
 }
