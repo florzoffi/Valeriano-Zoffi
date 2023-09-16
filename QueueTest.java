@@ -43,7 +43,6 @@ public class QueueTest {
   
   @Test public void test07HeadReturnsFirstAddedObject() {
     Queue queue = queueWithTwoElements();
-
     assertEquals(queue.head(), firstElement);
   }
   
@@ -53,6 +52,7 @@ public class QueueTest {
     queue.head();
     assertEquals( 1, queue.size() );
   }
+	
   @Test public void test09SizeRepresentsObjectInTheQueue() {
     assertEquals( 2, queueWithTwoElements().size() );
   }
