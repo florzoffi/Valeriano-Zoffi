@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+
 public class Queue {
     public List<Object> elements;
-    public String QueueEmpty = "Queue is empty";
+    public static String QueueEmpty = "Queue is empty";
     private QueueIntervention intervention;
     public Deque<QueueIntervention> stateHistory;
 
@@ -32,13 +33,14 @@ public class Queue {
     public Object take() {
     	Object item = intervention.take();
     	stateHistory.pop();
-    	intervention = stateHistory.peek();
+    	intervention =  stateHistory.peek();
         return item;
     }
 
     public Object head() {
         return intervention.head();
     }
+   
 
     public int size() {
         return elements.size();
