@@ -74,12 +74,15 @@ public class QueueTest {
   private Queue queueWithSomething() {
 		return emptyQueue().add( something );
 	}
+  
   private Queue emptyQueue() {
 		return new Queue();
 	}
+  
   private Queue queueWithTwoElements() {
 		return emptyQueue().add( firstElement ).add( secondElement );
 	}
+ 
   private void assertThrowsLike( Executable e ) {
 	  assertEquals( Queue.QueueEmpty , assertThrows( Error.class, e ).getMessage() );
 	  }

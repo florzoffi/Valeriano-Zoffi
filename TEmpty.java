@@ -6,12 +6,10 @@ public class TEmpty extends QueueIntervention {
         super(queue);
     }
 
-    @Override
     public Object take() {
         throw new Error(Queue.QueueEmpty);
     }
 
-    @Override
     public Object head() {
         throw new Error(Queue.QueueEmpty);
     }

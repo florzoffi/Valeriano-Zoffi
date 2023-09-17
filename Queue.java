@@ -1,16 +1,14 @@
 package queue;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ArrayDeque;
-import java.util.Deque;
 
 
 public class Queue {
-    public List<Object> elements;
+    public ArrayList<Object> elements;
     public static String QueueEmpty = "Queue is empty";
     private QueueIntervention intervention;
-    public Deque<QueueIntervention> stateHistory;
+    public ArrayDeque<QueueIntervention> stateHistory;
 
     public Queue() {
         elements = new ArrayList<>();
