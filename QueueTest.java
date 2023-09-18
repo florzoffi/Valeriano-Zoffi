@@ -15,11 +15,11 @@ public class QueueTest {
   @Test public void test01QueueShouldBeEmptyWhenCreated() {
     assertTrue( emptyQueue().isEmpty() );
   }
-
+  
   @Test public void test02AddElementsToTheQueue() {
     assertFalse( queueWithSomething().isEmpty() );
   }
-
+  
   @Test public void test03AddedElementsIsAtHead() {
 	assertEquals( something, queueWithSomething().head() );
   }
@@ -29,30 +29,31 @@ public class QueueTest {
     queue.take();
     assertTrue( queue.isEmpty() );
   }
-
+  
   @Test public void test05TakeReturnsLastAddedObject() {
     assertEquals( something , queueWithSomething().take() );
   }
-
+  
   @Test public void test06QueueBehavesFIFO() {
     Queue queue = queueWithTwoElements();
     assertEquals(queue.take(), firstElement);
     assertEquals(queue.take(), secondElement);
     assertTrue(queue.isEmpty() );
   }
-  
+
   @Test public void test07HeadReturnsFirstAddedObject() {
     Queue queue = queueWithTwoElements();
+
     assertEquals(queue.head(), firstElement);
   }
-  
+
   @Test public void test08HeadDoesNotRemoveObjectFromQueue() {
     Queue queue = queueWithSomething();
     assertEquals( 1, queue.size() );
     queue.head();
     assertEquals( 1, queue.size() );
   }
-	
+
   @Test public void test09SizeRepresentsObjectInTheQueue() {
     assertEquals( 2, queueWithTwoElements().size() );
   }
@@ -71,19 +72,11 @@ public class QueueTest {
 	  assertThrowsLike(()-> emptyQueue().head());
   }
   
-  private Queue queueWithSomething() {
-		return emptyQueue().add( something );
-	}
+  private Queue queueWithSomething() { return emptyQueue().add( something ); }
   
-  private Queue emptyQueue() {
-		return new Queue();
-	}
+  private Queue emptyQueue() { return new Queue(); }
   
-  private Queue queueWithTwoElements() {
-		return emptyQueue().add( firstElement ).add( secondElement );
-	}
- 
-  private void assertThrowsLike( Executable e ) {
-	  assertEquals( Queue.QueueEmpty , assertThrows( Error.class, e ).getMessage() );
-	  }
+  private Queue queueWithTwoElements() { return emptyQueue().add( firstElement ).add( secondElement ); }
+  
+  private void assertThrowsLike( Executable e ) { assertEquals( Queue.QueueEmpty , assertThrows( Error.class, e ).getMessage() ); }
 }
