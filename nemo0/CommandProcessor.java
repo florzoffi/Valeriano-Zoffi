@@ -17,7 +17,7 @@ public class CommandProcessor {
         );
     }
     
-    public void processCommands(String commands, Nemo<?> nemo) {
+    public void processCommands(String commands, Nemo nemo) {
         commands.chars()
             .mapToObj(ch -> (char) ch)
             .forEach(command -> commandList.stream()
@@ -27,7 +27,7 @@ public class CommandProcessor {
     
     public abstract class Command {
         abstract boolean matches(char command);
-        abstract void execute(Nemo<?> nemo);
+        abstract void execute(Nemo nemo);
     }
 
     public class DepthDecreaseCommand extends Command {
@@ -37,7 +37,7 @@ public class CommandProcessor {
         }
 
         @Override
-        public void execute(Nemo<?> nemo) {
+        public void execute(Nemo nemo) {
             nemo.decreaseDepth();
         }
     }
@@ -49,7 +49,7 @@ public class CommandProcessor {
         }
 
         @Override
-        public void execute(Nemo<?> nemo) {
+        public void execute(Nemo nemo) {
             nemo.increaseDepth();
         }
     }
@@ -61,7 +61,7 @@ public class CommandProcessor {
         }
 
         @Override
-        public void execute(Nemo<?> nemo) {
+        public void execute(Nemo nemo) {
             nemo.moveForward();
         }
     }
@@ -73,7 +73,7 @@ public class CommandProcessor {
         }
 
         @Override
-        public void execute(Nemo<?> nemo) {
+        public void execute(Nemo nemo) {
             nemo.rotateLeft();
         }
     }
@@ -85,7 +85,7 @@ public class CommandProcessor {
         }
 
         @Override
-        public void execute(Nemo<?> nemo) {
+        public void execute(Nemo nemo) {
             nemo.rotateRight();
         }
     }
@@ -97,7 +97,7 @@ public class CommandProcessor {
         }
 
         @Override
-        public void execute(Nemo<?> nemo) {
+        public void execute(Nemo nemo) {
             nemo.throwCapsule();
         }
     }

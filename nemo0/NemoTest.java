@@ -1,6 +1,7 @@
 package nemo0;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,8 +56,6 @@ public class NemoTest<E> {
 	@Test public void test12NemoThrowsCapsule() {
 		assertEquals( Nemo.successfullLaunch, nemoDidThis("dm").getMessage() );
 	}
-	
-	@Test public void test13NemoCantThrowsCapsuleUnderDeapth1() {
 		
 	@Test public void test13NemoCantThrowsCapsuleUnderDeapth1() {
 		assertEquals( Nemo.submarineHasExploded , assertThrows(Exception.class, ()-> nemoDidThis("ddm")).getMessage() );
@@ -82,16 +81,16 @@ public class NemoTest<E> {
 	}
 	
 	
-	private Nemo<E> nemo() {
-		Nemo<E> nemo = new Nemo<>();
+	private Nemo nemo() {
+		Nemo nemo = new Nemo();
 		return nemo;
 	}
-	private Nemo<E> nemoDidThis(String action) {
-		Nemo<E> nemo = nemo();
+	private Nemo nemoDidThis(String action) {
+		Nemo nemo = nemo();
         nemo.action(action);
 		return nemo;
 	}
-	private void nemosStateVerification(Nemo<E> nemo,int expectedDepth, ArrayList<Integer> expectedPosition, String expectedDirection, String expectedMessage) {
+	private void nemosStateVerification(Nemo nemo,int expectedDepth, ArrayList<Integer> expectedPosition, String expectedDirection, String expectedMessage) {
 		assertEquals(expectedDepth, nemo.getDepth());
 	    assertEquals(expectedPosition, nemo.getPosition());
 	    assertEquals(expectedDirection, nemo.getDirection());
