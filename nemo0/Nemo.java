@@ -11,7 +11,7 @@ public class Nemo<E> {
     private CommandProcessor commandProcessor;
     public static String noCapsuleThrown = "No capsule has been thrown yet";
     public static String successfullLaunch = "There has been a successfull launch";
-    public static String submarineHasExploded = "El submarino exploto";
+    public static String submarineHasExploded = "The submarine has exploded";
 
 
     public Nemo() {
