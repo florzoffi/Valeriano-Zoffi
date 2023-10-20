@@ -1,35 +1,96 @@
 package nemo0;
 
-import java.util.Arrays;
+public abstract class Direction {
+    public abstract String getDirectionName();
+    public abstract Direction rotateLeft();
+    public abstract Direction rotateRight();
+    public abstract Coordinates moveForward(Coordinates currentCoords);
+}
 
-public class Direction {
-    private String currentDirection;
-
-    public Direction() {
-        this.currentDirection = "right";
+class UpDirection extends Direction {
+    @Override
+    public String getDirectionName() {
+        return "up";
     }
 
-    public String getCurrentDirection() {
-        return currentDirection;
+    @Override
+    public Direction rotateLeft() {
+        return new LeftDirection();
     }
 
-    public void rotateLeft() {
-        currentDirection = rotateDirection(1);
+    @Override
+    public Direction rotateRight() {
+        return new RightDirection();
     }
 
-    public void rotateRight() {
-        currentDirection = rotateDirection(-1);
+    @Override
+    public Coordinates moveForward(Coordinates currentCoords) {
+        return new Coordinates(currentCoords.getX(), currentCoords.getY() + 1);
+    }
+}
+
+class DownDirection extends Direction {
+    @Override
+    public String getDirectionName() {
+        return "down";
     }
 
-    private String rotateDirection(int offset) {
-        String[] directions = {"right", "up", "left", "down"};
-        int currentIndex = Arrays.asList(directions).indexOf(currentDirection);
-        int newIndex = (currentIndex + offset) % 4;
+    @Override
+    public Direction rotateLeft() {
+        return new RightDirection();
+    }
 
-        if (newIndex < 0) {
-            newIndex = 4 + newIndex;
-        }
+    @Override
+    public Direction rotateRight() {
+        return new LeftDirection();
+    }
 
-        return directions[newIndex];
+    @Override
+    public Coordinates moveForward(Coordinates currentCoords) {
+        return new Coordinates(currentCoords.getX(), currentCoords.getY() - 1);
+    }
+}
+
+class LeftDirection extends Direction {
+    @Override
+    public String getDirectionName() {
+        return "left";
+    }
+
+    @Override
+    public Direction rotateLeft() {
+        return new DownDirection();
+    }
+
+    @Override
+    public Direction rotateRight() {
+        return new UpDirection();
+    }
+
+    @Override
+    public Coordinates moveForward(Coordinates currentCoords) {
+        return new Coordinates(currentCoords.getX() - 1, currentCoords.getY());
+    }
+}
+
+class RightDirection extends Direction {
+    @Override
+    public String getDirectionName() {
+        return "right";
+    }
+
+    @Override
+    public Direction rotateLeft() {
+        return new UpDirection();
+    }
+
+    @Override
+    public Direction rotateRight() {
+        return new DownDirection();
+    }
+
+    @Override
+    public Coordinates moveForward(Coordinates currentCoords) {
+        return new Coordinates(currentCoords.getX() + 1, currentCoords.getY());
     }
 }
