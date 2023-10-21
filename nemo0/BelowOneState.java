@@ -8,7 +8,8 @@ public class BelowOneState extends DepthState {
 
     public Object decreaseDepth(Nemo nemo) {
     	nemo.depth --;
-        nemo.depthStates.add( new DepthOneState() );
+    	if (nemo.getDepth() == 2) {
+    	nemo.depthStates.add( new DepthOneState() );}
         return this;
     }
     
