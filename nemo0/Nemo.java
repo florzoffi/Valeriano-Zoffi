@@ -9,6 +9,7 @@ public class Nemo {
 	private Direction direction;
     private Coordinates position;
     public int depth;
+    public int thrownCapsules;
     public static String messageOfCapsule;
     public static String noCapsuleThrown = "No capsule has been thrown yet";
     public static String successfullLaunch = "There has been a successfull launch";
@@ -32,6 +33,7 @@ public class Nemo {
         
         messageOfCapsule = noCapsuleThrown;
         depth = 0;
+        thrownCapsules = 0;
         
         depthStates = new ArrayList<DepthState>();
         depthStates.add( new SurfaceState() );
@@ -69,11 +71,13 @@ public class Nemo {
     
     public Nemo throwCapsule() {
     	depthStates.get(depthStates.size() - 1).throwCapsule(this);
+		thrownCapsules++;
         return this;
     }
 
     public Nemo increaseDepth() {
     	depthStates.get(depthStates.size() - 1).increaseDepth(this);
+    	 
         return this;
     }
 
