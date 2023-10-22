@@ -3,18 +3,17 @@ package nemo0;
 public class BelowOneState extends DepthState {
     public Object increaseDepth(Nemo nemo) {
         nemo.depth ++;
+        nemo.depthStates.add( new BelowOneState() );
         return this;
     }
 
     public Object decreaseDepth(Nemo nemo) {
     	nemo.depth --;
-    	if (nemo.getDepth() == 2) {
-    	nemo.depthStates.add( new DepthOneState() );}
+        nemo.depthStates.remove( nemo.depthStates.size() - 1);
         return this;
     }
     
     public Object throwCapsule(Nemo nemo) {
-    	throw new IllegalStateException(Nemo.submarineHasExploded);
+    	throw new Error(Nemo.submarineHasExploded);
     }
-    
 }

@@ -1,7 +1,6 @@
 package nemo0;
 
 public class DepthOneState extends DepthState{
-	
     public Object increaseDepth(Nemo nemo) {
     	nemo.depth ++;
         nemo.depthStates.add( new BelowOneState() );
@@ -10,7 +9,7 @@ public class DepthOneState extends DepthState{
 
     public Object decreaseDepth(Nemo nemo) {
     	nemo.depth --;
-        nemo.depthStates.add( new SurfaceState() );
+        nemo.depthStates.remove( nemo.depthStates.size() - 1);
         return this;
     }
     

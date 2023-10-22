@@ -78,7 +78,7 @@ public class NemoTest<E> {
 	}
 	
 	@Test public void test17NemoCantThrowsCapsuleUnderDeapth1() {
-		assertEquals( Nemo.submarineHasExploded , assertThrows(Exception.class, ()-> nemoDidThis("ddm")).getMessage() );
+		assertEquals( Nemo.submarineHasExploded , assertThrows(Error.class, ()-> nemoDidThis("ddm")).getMessage() );
 	}
 	
 	@Test public void test18NemoGoesDownThreeTimesAndUpTwoAndThrowsCapsule(){
@@ -86,7 +86,7 @@ public class NemoTest<E> {
 	}
 	
 	@Test public void test19NemoGoesDownFourTimesAndUpOneAndCantThrowsCapsule(){
-		assertEquals( Nemo.submarineHasExploded , assertThrows(Exception.class, ()-> nemoDidThis("ddddum")).getMessage() );
+		assertEquals( Nemo.submarineHasExploded , assertThrows(Error.class, ()-> nemoDidThis("ddddum")).getMessage() );
 	}
 	
 	@Test public void test20NemoCanMoveUnderSurface(){

@@ -5,6 +5,3 @@ public abstract class DepthState {
     public abstract Object decreaseDepth(Nemo nemo);
     public abstract Object throwCapsule(Nemo nemo);
 }
-
-
-

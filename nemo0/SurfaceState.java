@@ -1,7 +1,6 @@
 package nemo0;
 
-public class SurfaceState extends DepthState{
-	
+class SurfaceState extends DepthState{
 	@Override
     public Object increaseDepth(Nemo nemo) {
     	nemo.depth ++;
