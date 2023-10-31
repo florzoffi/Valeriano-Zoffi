@@ -6,6 +6,7 @@ public class Line {
 	public int height;
 	public char c;
 	public char[][] grid;
+	public Player player;
 
 	public Line (int base, int height, char c) {
 		if (base < 4) {
@@ -17,7 +18,6 @@ public class Line {
 		}
 		this.height = height;
 		this.c = c;
-		turn = 'R';
 		
 		grid = new char[height][base];
 	    for (int row = 0; row < height; row++) {
@@ -25,6 +25,9 @@ public class Line {
 	            grid[row][col] = c;
 	        }
 	    }
+	    
+	    player = new RedPlayer();
+		turn = 'R';
 	}
 
 	public boolean finished() {
@@ -82,43 +85,33 @@ public class Line {
 		if (!redTurn()) {
 	        throw new RuntimeException( "It's not the player's turn." );
 	    }
-		
-		if (column < 0 || column >= base || isColumnFull(column)) {
-			setTurn( 'B' );
-	        throw new RuntimeException( "Invalid move. Your turn has been lost" );
-	    }
-		
-		for (int row = height - 1; row >= 0; row--) {
-	        if (grid[row][column] == c) {
-	            grid[row][column] = 'R'; // Place the red piece
-	            setTurn( 'B' );
-	            return;
-	        }
-	    }
+
+        if (column < 0 || column >= base || isColumnFull(column)) {
+        	player.setTurn(this);
+            throw new RuntimeException("Invalid move. Your turn has been lost");
+        }
+        
+        player.playAt(this, column);
+        player.setTurn(this);
 	}
 
+	public char[] show() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public void playBlueAt(int column) {
 		if (!blueTurn()) {
 	        throw new RuntimeException( "It's not the player's turn." );
 	    }
 		
 		if (column < 0 || column >= base || isColumnFull(column)) {
-			setTurn( 'R' );
+			player.setTurn(this);
 	        throw new RuntimeException( "Invalid move. Your turn has been lost" );
 	    }
 		
-		for (int row = height - 1; row >= 0; row--) {
-	        if (grid[row][column] == c) {
-	            grid[row][column] = 'B'; // Place the blue piece
-	            setTurn( 'R' );
-	            return;
-	        }
-	    }
-	}
-
-	public char[] show() {
-		// TODO Auto-generated method stub
-		return null;
+		player.playAt(this, column);
+        player.setTurn(this);
 	}
 	
 	public boolean isColumnFull(int column) {
@@ -131,20 +124,15 @@ public class Line {
 		return true;
 	}
 	
-    public void setTurn(char turn) {
-	    this.turn = turn;
-		
-	  }
+	public boolean redTurn() {
+		return turn == 'R';
+	}
+	
+	public boolean blueTurn() {
+		return turn == 'B';
+	}	
 
-    public boolean redTurn() {
-	    return getTurn() == 'R';
-	  }
-
-    private char getTurn() {
+    public char getTurn() {
 		return turn;
-	  }
-
-    public boolean blueTurn() {
-	    return getTurn() == 'B';
-	  }
+	}
 }

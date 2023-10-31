@@ -176,4 +176,13 @@ public class LineaTest {
 		
 		assertTrue( game.finished() );
 	}
+	
+	@Test public void test16GameDoesNotFinishIfNoWinOrDraw() {
+		Line game = new Line( 4, 4, ' ' );
+		
+		game.playRedAt( 0 );
+		game.playBlueAt( 0 );
+
+		assertFalse( game.finished() );
+	}
 }
