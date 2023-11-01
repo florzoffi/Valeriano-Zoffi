@@ -9,13 +9,11 @@ public class Line {
 	public Player player;
 
 	public Line (int base, int height, char c) {
-		if (base < 4) {
+		if (base < 4 || height < 4) {
 			throw new RuntimeException( "To ensure every type of win is available, dimensions of four or above are required" );
 		}
+		
 		this.base = base;
-		if (height < 4) {
-			throw new RuntimeException( "To ensure every type of win is available, dimensions of four or above are required" );
-		}
 		this.height = height;
 		this.c = c;
 		
@@ -80,38 +78,16 @@ public class Line {
 	    
 	    return true; // The game is a draw
 	}
-
-	public void playRedAt(int column) {
-		if (!redTurn()) {
-	        throw new RuntimeException( "It's not the player's turn." );
-	    }
-
-        if (column < 0 || column >= base || isColumnFull(column)) {
-        	player.setTurn(this);
-            throw new RuntimeException("Invalid move. Your turn has been lost");
-        }
-        
-        player.playAt(this, column);
-        player.setTurn(this);
-	}
-
-	public char[] show() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	public void playBlueAt(int column) {
-		if (!blueTurn()) {
-	        throw new RuntimeException( "It's not the player's turn." );
-	    }
-		
-		if (column < 0 || column >= base || isColumnFull(column)) {
-			player.setTurn(this);
-	        throw new RuntimeException( "Invalid move. Your turn has been lost" );
-	    }
+	public Line play(String p, int column) {
+		if (!player.isTurn(p)) {
+			throw new RuntimeException( "It's not the player's turn." );
+		}
 		
 		player.playAt(this, column);
         player.setTurn(this);
+        
+        return this;
 	}
 	
 	public boolean isColumnFull(int column) {
@@ -124,6 +100,11 @@ public class Line {
 		return true;
 	}
 	
+	public char[] show() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public boolean redTurn() {
 		return turn == 'R';
 	}
@@ -131,8 +112,4 @@ public class Line {
 	public boolean blueTurn() {
 		return turn == 'B';
 	}	
-
-    public char getTurn() {
-		return turn;
-	}
 }

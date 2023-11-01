@@ -7,16 +7,11 @@ public abstract class Player {
         this.playerColor = playerColor;
     }
 
-    public void playAt(Line game, int column) {
-        for (int row = game.height - 1; row >= 0; row--) {
-            if (game.grid[row][column] == game.c) {
-                game.grid[row][column] = playerColor;
-                return;
-            }
-        }
-    }
+    public abstract void playAt(Line game, int column);
     
     public abstract void setTurn(Line game);
 
 	public abstract char getPlayerColor();
+
+	public abstract boolean isTurn(String p);
 }

@@ -8,13 +8,8 @@ public class Game {
         System.out.println( game.show() );
     
       while ( !game.finished() ) {
-          game.playRedAt( prompt( "Reds? " ) );
+          game.play( null, prompt( "Reds? " ) );
           System.out.println( game.show() );
-      
-        if ( !game.finished() ) {
-            game.playBlueAt( prompt( "Blues? " ) );
-            System.out.println( game.show() );
-        }
       }
     
     }
