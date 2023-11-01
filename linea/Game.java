@@ -8,7 +8,7 @@ public class Game {
         System.out.println( game.show() );
     
       while ( !game.finished() ) {
-          game.play( null, prompt( "Reds? " ) );
+		game.play( null, prompt( "Column? " ) );
           System.out.println( game.show() );
       }
     

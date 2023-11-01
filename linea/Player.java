@@ -13,5 +13,5 @@ public abstract class Player {
 
 	public abstract char getPlayerColor();
 
-	public abstract boolean isTurn(String p);
+	public abstract boolean isTurn(String color);
 }

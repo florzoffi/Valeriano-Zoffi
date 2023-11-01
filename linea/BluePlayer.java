@@ -2,7 +2,7 @@ package linea;
 
 public class BluePlayer extends Player {
 	public BluePlayer() {
-		super('B');
+		super( 'B' );
 	}
 	
 	@Override
@@ -17,22 +17,28 @@ public class BluePlayer extends Player {
 	}
 
 	@Override
-	public boolean isTurn(String p) {
-		return "Blue" == p;
+	public boolean isTurn(String color) {
+		return "Blue" == color;
 	}
 
 	@Override
 	public void playAt(Line game, int column) {
-		if (column < 0 || column >= game.base || game.isColumnFull(column)) {
-        	setTurn(game);
-            throw new RuntimeException("Invalid move. Your turn has been lost");
-        }
+		int y = game.height - 1;
 		
-		for (int row = game.height - 1; row >= 0; row--) {
-            if (game.grid[row][column] == game.c) {
-                game.grid[row][column] = playerColor;
-                return;
-            }
-        }
+		if (column < 0 || column >= game.base) {
+		    setTurn(game);
+		    throw new RuntimeException("Invalid move. Your turn has been lost");
+		}
+		
+		while (y >= 0 && !game.grid.get(y).get(column).isEmpty()) {
+		    y--;
+		    if (y < 0) {
+		        setTurn(game);
+		        throw new RuntimeException("Invalid move. Your turn has been lost");
+		    }
+		}
+
+	    game.grid.get(y).get(column).setValue(playerColor);
+	    setTurn(game);
 	}
 }

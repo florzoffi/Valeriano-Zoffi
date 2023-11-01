@@ -90,7 +90,7 @@ public class LineaTest {
 		assertFalse( game.blueTurn() );
 	}
 	
-	@Test public void test11VerticalWin() {
+	@Test public void test11GameFinishedWhenVerticalWin() {
 		Line game = new Line( 6, 7, ' ' );
 		
 		game.play("Red", 3 );
