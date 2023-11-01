@@ -8,7 +8,7 @@ public class Game {
         System.out.println( game.show() );
     
       while ( !game.finished() ) {
-		game.play( null, prompt( "Column? " ) );
+		game.play( null, prompt( "Where? " ) );
           System.out.println( game.show() );
       }
     

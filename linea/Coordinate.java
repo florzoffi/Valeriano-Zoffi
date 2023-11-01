@@ -32,4 +32,14 @@ public class Coordinate {
     public boolean isEmpty() {
         return value == line.c;
     }
+    
+    public Coordinate findEmptyCoordinate(Line game, int column) {
+        for (int y = game.height - 1; y >= 0; y--) {
+            Coordinate coordinate = game.grid.get(y).get(column);
+            if (coordinate.isEmpty()) {
+                return coordinate;
+            }
+        }
+        return null; // No empty cell found
+    }
 }
