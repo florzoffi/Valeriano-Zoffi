@@ -8,30 +8,18 @@ public class Line {
 	public int base;
 	public int height;
 	public char c;
-	public List<List<Coordinate>> grid;
-	public Player player;
+	private GameBoard gameBoard;
+	public TurnHandler player;
 	public GameStatus gameStatus;
 
 	public Line (int base, int height, char c) {
-		if (base < 4 || height < 4) {
-			throw new RuntimeException( "To ensure every type of win is available, dimensions of four or above are required" );
-		}
-		
 		this.base = base;
 		this.height = height;
 		this.c = c;
 		
-		grid = new ArrayList<>();
-        for (int y = 0; y < height; y++) {
-            List<Coordinate> rowList = new ArrayList<>();
-            for (int x = 0; x < base; x++) {
-                rowList.add(new Coordinate(x, y, c, this));
-            }
-            grid.add(rowList);
-        }
-	    
-        gameStatus = new GameStatus(this);
-	    player = new RedPlayer();
+		gameBoard = new GameBoard(base, height);
+        gameStatus = new OnGoingStatus(gameBoard);
+	    player = new RedTurn();
 		turn = 'R';
 	}
 
@@ -44,8 +32,7 @@ public class Line {
 			throw new RuntimeException( "It's not the player's turn." );
 		}
 		
-		player.playAt(this, column);
-        
+		player.playAt(this, gameBoard, column);
         return this;
 	}
 	
@@ -60,5 +47,6 @@ public class Line {
 	
 	public boolean blueTurn() {
 		return turn == 'B';
-	}	
+	}
+
 }
