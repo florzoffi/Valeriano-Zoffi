@@ -20,13 +20,13 @@ public class FinishedStatus extends GameStatus {
 	}
 
 	@Override
-	public void playRedAt(Line game, GameBoard gameBoard, int column) {
+	public GameStatus playRedAt(Line game, GameBoard gameBoard, int column) {
 		throw new RuntimeException( "The game has ended.");
 		
 	}
 
 	@Override
-	public void playBlueAt(Line game, GameBoard gameBoard, int column) {
+	public GameStatus playBlueAt(Line game, GameBoard gameBoard, int column) {
 		throw new RuntimeException( "The game has ended.");
 	}
 

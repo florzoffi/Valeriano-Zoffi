@@ -12,8 +12,9 @@ public class BluePlayerStatus extends GameStatus {
 	}
 
 	@Override
-	public void playBlueAt(Line game, GameBoard gameBoard, int column) {
+	public GameStatus playBlueAt(Line game, GameBoard gameBoard, int column) {
         if (column < 0 || column >= gameBoard.getNumColumns() || gameBoard.isColumnFull(column)) {
+        	setTurn();
             throw new RuntimeException("Invalid move. Your turn has been lost");
         }
 
@@ -22,13 +23,13 @@ public class BluePlayerStatus extends GameStatus {
         lastPlayedRow = gameBoard.getColumnHeight(column);
         
         if (isGameFinished()) {
-        	game.gameStatus = new FinishedStatus(gameBoard);
+        	return game.gameStatus = new FinishedStatus(gameBoard);
         }
-		
+		return game.gameStatus = new RedPlayerStatus(gameBoard);
 	}
 	
 	@Override
-	public void playRedAt(Line game, GameBoard gameBoard, int column) {
+	public GameStatus playRedAt(Line game, GameBoard gameBoard, int column) {
 		throw new RuntimeException("It's not the player's turn.");
 	}
 
@@ -45,13 +46,9 @@ public class BluePlayerStatus extends GameStatus {
 	@Override
 	public char isTurn() {
 		return 'B';
-	}
-
-	@Override
+	}	
+	
 	public void setTurn() {
 		game.gameStatus = new RedPlayerStatus(gameBoard);
 	}
-	
-	
-
 }
