@@ -19,7 +19,13 @@ public class GameBoard {
         grid = new ArrayList<>(numColumns);
 
         for (int i = 0; i < numColumns; i++) {
-            grid.add(new ArrayList<>(numRows)); // Initialize each column with empty lists
+            ArrayList<Character> column = new ArrayList<>(numRows);
+            grid.add(column); // Initialize each column with an empty list
+
+            for (int j = 0; j < numRows; j++) {
+                column.add(' '); // Fill each cell in the column with empty characters (spaces)
+            }
+
             columnHeights[i] = 0;
         }
     }

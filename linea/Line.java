@@ -27,11 +27,13 @@ public class Line {
 	
 	public Line playBlueAt(int column) {
         gameStatus.playBlueAt(this, gameBoard, column);
+        gameStatus = new RedPlayerStatus(gameBoard);
         return this;
     }
 
 	public Line playRedAt(int column) {
         gameStatus.playRedAt(this, gameBoard, column);
+        gameStatus = new BluePlayerStatus(gameBoard);
         return this;
 	}
 	
@@ -40,7 +42,7 @@ public class Line {
 	}
 	
 	public boolean blueTurn() {
-		return gameStatus.isTurn() == 'B' ;
+		return gameStatus.isTurn() == 'B';
 	}
 
 }

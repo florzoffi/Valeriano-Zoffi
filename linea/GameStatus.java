@@ -1,12 +1,9 @@
 package linea;
 
 public abstract class GameStatus {
-    public GameStatus(GameBoard gameBoard) {
-    }
-
-    public abstract void switchTurn();
-
     public abstract char isTurn();
+    
+	public abstract void setTurn();
 
     public abstract void playRedAt(Line game, GameBoard gameBoard, int column);
     

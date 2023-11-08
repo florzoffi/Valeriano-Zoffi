@@ -2,7 +2,7 @@ package linea;
 
 public class FinishedStatus extends GameStatus {
     public FinishedStatus(GameBoard gameBoard) {
-        super(gameBoard);
+        super();
     }
     
     public void playAt(Line game, GameBoard gameBoard, int column) {
@@ -13,11 +13,6 @@ public class FinishedStatus extends GameStatus {
     public boolean isGameFinished() {
         return true; // Game is always considered finished in this state
     }
-
-	@Override
-	public void switchTurn() {
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	public char isTurn() {
@@ -34,4 +29,7 @@ public class FinishedStatus extends GameStatus {
 	public void playBlueAt(Line game, GameBoard gameBoard, int column) {
 		throw new RuntimeException( "The game has ended.");
 	}
+
+	@Override
+	public void setTurn() { }
 }

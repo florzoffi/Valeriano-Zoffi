@@ -1,12 +1,14 @@
 package linea;
 
 public class RedPlayerStatus extends GameStatus {
+	private Line game;
 	private GameBoard gameBoard;
 	int lastPlayedColumn;
 	int lastPlayedRow;
 	
 	public RedPlayerStatus(GameBoard gameBoard) {
-		super(gameBoard);
+		super();
+        this.gameBoard = gameBoard;
 	}
 
 	@Override
@@ -23,7 +25,6 @@ public class RedPlayerStatus extends GameStatus {
         	game.gameStatus = new FinishedStatus(gameBoard);
         }
         
-        switchTurn();
 	}
 	
 	@Override
@@ -35,20 +36,19 @@ public class RedPlayerStatus extends GameStatus {
 	public boolean isGameFinished() {
 		if (gameBoard.checkHorizontalWin('R') || gameBoard.checkVerticalWin('R') ||
 	            gameBoard.checkDiagonalWin('R', lastPlayedRow, lastPlayedColumn)) {
+			game.gameStatus = new FinishedStatus(gameBoard);
 	            return true; 
 	        }
 		return false;
 	}
 
 	@Override
-	public void switchTurn() {
-		// TODO Auto-generated method stub
-		
+	public char isTurn() {
+		return 'R';
 	}
 
 	@Override
-	public char isTurn() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setTurn() {
+		game.gameStatus = new RedPlayerStatus(gameBoard);
 	}
 }

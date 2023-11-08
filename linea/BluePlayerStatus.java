@@ -7,7 +7,8 @@ public class BluePlayerStatus extends GameStatus {
 	int lastPlayedRow;
 	
 	public BluePlayerStatus(GameBoard gameBoard) {
-		super(gameBoard);
+		super();
+		this.gameBoard = gameBoard;
 	}
 
 	@Override
@@ -23,8 +24,6 @@ public class BluePlayerStatus extends GameStatus {
         if (isGameFinished()) {
         	game.gameStatus = new FinishedStatus(gameBoard);
         }
-        
-        switchTurn();
 		
 	}
 	
@@ -37,20 +36,20 @@ public class BluePlayerStatus extends GameStatus {
 	public boolean isGameFinished() {
 		if (gameBoard.checkHorizontalWin('B') || gameBoard.checkVerticalWin('B') ||
 	            gameBoard.checkDiagonalWin('B', lastPlayedRow, lastPlayedColumn)) {
+			game.gameStatus = new FinishedStatus(gameBoard);
 	            return true; 
 	        }
 		return false;
 	}
 
 	@Override
-	public void switchTurn() {
-		game.gameStatus = new RedPlayerStatus(gameBoard);
-		
+	public char isTurn() {
+		return 'B';
 	}
 
 	@Override
-	public char isTurn() {
-		return 'B';
+	public void setTurn() {
+		game.gameStatus = new RedPlayerStatus(gameBoard);
 	}
 	
 	
