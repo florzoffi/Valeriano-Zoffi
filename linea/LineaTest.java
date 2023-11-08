@@ -11,7 +11,6 @@ public class LineaTest {
 	@Test public void test01SetDimensionsForGame() {
 		Line game = new Line( 6, 7, ' ' );
 
-	    // No puedo ver la consola,, porq???
 	    assertEquals( 6, game.base );
 	    assertEquals( 7, game.height );
 	    assertEquals( ' ', game.c );
@@ -34,7 +33,7 @@ public class LineaTest {
 	@Test public void test05TurnChangesWhenRedPlays() {
 		Line game = new Line( 6, 7, ' ' );
 		
-		game.play("Red", 3 );
+		game.playRedAt(3);
 		
 		assertTrue( game.blueTurn() );
 		assertFalse( game.redTurn() );
@@ -43,8 +42,8 @@ public class LineaTest {
 	@Test public void test06TurnChangesWhenBluePlays() {
 		Line game = new Line( 6, 7, ' ' );
 		
-		game.play("Red", 3 );
-		game.play("Blue", 4 );
+		game.playRedAt(3);
+		game.playBlueAt(4);
 		
 		assertTrue( game.redTurn() );
 		assertFalse( game.blueTurn() );
@@ -53,7 +52,7 @@ public class LineaTest {
 	@Test public void test07FailsIfBluePlaysInRedsTurn() {
 		Line game = new Line( 6, 7, ' ');
 		
-		assertThrows( RuntimeException.class, () -> game.play("Blue", 5 ) );
+		assertThrows( RuntimeException.class, () -> game.playBlueAt(5) );
 		assertFalse( game.blueTurn() );
 		assertTrue( game.redTurn() );
 	}
@@ -61,9 +60,9 @@ public class LineaTest {
 	@Test public void test08FailsIfRedPlaysInBluesTurn() {
 		Line game = new Line( 6, 7, ' ' );
 		 
-		game.play("Red", 3 );
+		game.playRedAt(3);
 		
-		assertThrows( RuntimeException.class, () -> game.play("Red", 4 ) );
+		assertThrows( RuntimeException.class, () -> game.playRedAt(4) );
 		assertTrue( game.blueTurn() );
 		assertFalse( game.redTurn() );
 	}
@@ -71,7 +70,7 @@ public class LineaTest {
 	@Test public void test09TurnIsLostWhenInvalidColumnIsPlayed() {
 		Line game = new Line( 6, 7, ' ' );
 		
-		assertThrows( RuntimeException.class, () -> game.play("Red", 8 ) );
+		assertThrows( RuntimeException.class, () -> game.playRedAt(8) );
 		assertTrue( game.blueTurn() );
 		assertFalse( game.redTurn() );
 	}
@@ -79,13 +78,13 @@ public class LineaTest {
 	@Test public void test10TurnIsLostIfColumnIsFull() {
 		Line game = new Line( 6, 4, ' ' );
 		
-		game.play("Red", 3 );
-		game.play("Blue", 1 );
-		game.play("Red", 3 );
-		game.play("Blue", 3 );
-		game.play("Red", 3 );
+		game.playRedAt(3);
+		game.playBlueAt(1);
+		game.playRedAt(3);
+		game.playBlueAt(3);
+		game.playRedAt(3);
 		
-		assertThrows( RuntimeException.class, () -> game.play("Blue", 3 ) );
+		assertThrows( RuntimeException.class, () -> game.playBlueAt(3) );
 		assertTrue( game.redTurn() );
 		assertFalse( game.blueTurn() );
 	}
@@ -93,13 +92,13 @@ public class LineaTest {
 	@Test public void test11GameFinishedWhenVerticalWin() {
 		Line game = new Line( 6, 7, ' ' );
 		
-		game.play("Red", 3 );
-		game.play("Blue", 1 );
-		game.play("Red", 3 );
-		game.play("Blue", 2 );
-		game.play("Red", 3 );
-		game.play("Blue", 4 );
-		game.play("Red", 3 );
+		game.playRedAt(3);
+		game.playBlueAt(1);
+		game.playRedAt(3);
+		game.playBlueAt(2);
+		game.playRedAt(3);
+		game.playBlueAt(4);
+		game.playRedAt(3);
 		
 		assertTrue( game.finished() );
 	}
@@ -107,17 +106,17 @@ public class LineaTest {
 	@Test public void test12GameFinishesWhenDiagonalBottomLeftToTopRightWin() {
 		Line game = new Line( 6, 7, ' ' );
 		
-		game.play("Red", 1 );
-		game.play("Blue", 2 );
-		game.play("Red", 2 );
-		game.play("Blue", 3 );
-		game.play("Red", 3 );
-		game.play("Blue", 4 );
-		game.play("Red", 3 );
-		game.play("Blue", 4 );
-		game.play("Red", 4 );
-		game.play("Blue", 1 );
-		game.play("Red", 4 );
+		game.playRedAt(1);
+		game.playBlueAt(2);
+		game.playRedAt(2);
+		game.playBlueAt(3);
+		game.playRedAt(3);
+		game.playBlueAt(4);
+		game.playRedAt(3);
+		game.playBlueAt(4);
+		game.playRedAt(4);
+		game.playBlueAt(1);
+		game.playRedAt(4);
 		
 		assertTrue( game.finished() );
 	}
@@ -125,17 +124,17 @@ public class LineaTest {
 	@Test public void test13GameFinishesWhenDiagonalTopLeftToBottomRightWin() {
 		Line game = new Line( 6, 7, ' ' );
 		
-		game.play("Red", 5 );
-		game.play("Blue", 4 );
-		game.play("Red", 4 );
-		game.play("Blue", 3 );
-		game.play("Red", 3 );
-		game.play("Blue", 2 );
-		game.play("Red", 3 );
-		game.play("Blue", 2 );
-		game.play("Red", 2 );
-		game.play("Blue", 5 );
-		game.play("Red", 2 );
+		game.playRedAt(5);
+		game.playBlueAt(4);
+		game.playRedAt(4);
+		game.playBlueAt(3);
+		game.playRedAt(3);
+		game.playBlueAt(2);
+		game.playRedAt(3);
+		game.playBlueAt(2);
+		game.playRedAt(2);
+		game.playBlueAt(5);
+		game.playRedAt(2);
 		
 		assertTrue( game.finished() );
 	}
@@ -143,13 +142,13 @@ public class LineaTest {
 	@Test public void test14GameFinishesWhenHorizontalWin() {
 		Line game = new Line( 6, 7, ' ' );
 		
-		game.play("Red", 0 );
-		game.play("Blue", 0 );
-		game.play("Red", 1 );
-		game.play("Blue", 1 );
-		game.play("Red", 2 );
-		game.play("Blue", 2 );
-		game.play("Red", 3 );
+		game.playRedAt(0);
+		game.playBlueAt(0);
+		game.playRedAt(1);
+		game.playBlueAt(1);
+		game.playRedAt(2);
+		game.playBlueAt(2);
+		game.playRedAt(3);
 		
 		assertTrue( game.finished() );
 	}
@@ -157,22 +156,22 @@ public class LineaTest {
 	@Test public void test15GameFinishesWhenDraw() {
 		Line game = new Line( 4, 4, ' ' );
 		
-		game.play("Red", 0 );
-		game.play("Blue", 0 );
-		game.play("Red", 0 );
-		game.play("Blue", 0 );
-		game.play("Red", 1 );
-		game.play("Blue", 1 );
-		game.play("Red", 1 );
-		game.play("Blue", 1 );
-		game.play("Red", 3 );
-		game.play("Blue", 2 );
-		game.play("Red", 2 );
-		game.play("Blue", 3 );
-		game.play("Red", 3 );
-		game.play("Blue", 2 );
-		game.play("Red", 2 );
-		game.play("Blue", 3 );
+		game.playRedAt(0);
+		game.playBlueAt(0);
+		game.playRedAt(0);
+		game.playBlueAt(0);
+		game.playRedAt(1);
+		game.playBlueAt(1);
+		game.playRedAt(1);
+		game.playBlueAt(1);
+		game.playRedAt(3);
+		game.playBlueAt(2);
+		game.playRedAt(2);
+		game.playBlueAt(3);
+		game.playRedAt(3);
+		game.playBlueAt(2);
+		game.playRedAt(2);
+		game.playBlueAt(3);
 		
 		assertTrue( game.finished() );
 	}
@@ -180,8 +179,8 @@ public class LineaTest {
 	@Test public void test16GameDoesNotFinishIfNoWinOrDraw() {
 		Line game = new Line( 4, 4, ' ' );
 		
-		game.play("Red", 0 );
-		game.play("Blue", 0 );
+		game.playRedAt(0);
+		game.playBlueAt(0);
 
 		assertFalse( game.finished() );
 	}

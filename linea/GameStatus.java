@@ -1,11 +1,16 @@
 package linea;
 
 public abstract class GameStatus {
-    protected final GameBoard gameBoard;
-
     public GameStatus(GameBoard gameBoard) {
-        this.gameBoard = gameBoard;
     }
 
-    public abstract boolean isGameFinished();
+    public abstract void switchTurn();
+
+    public abstract char isTurn();
+
+    public abstract void playRedAt(Line game, GameBoard gameBoard, int column);
+    
+    public abstract void playBlueAt(Line game, GameBoard gameBoard, int column);
+	
+	public abstract boolean isGameFinished() ;
 }
