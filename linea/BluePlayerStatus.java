@@ -13,13 +13,7 @@ public class BluePlayerStatus extends GameStatus {
 	@Override
 	public GameStatus playBlueAt(Line game, int column) {
 		gameBoard.placeChip(column, 'B');
-		
-		
-	    if (gameBoard.checkWin(column, 'B', game) || gameBoard.isDraw(game)) {
-	        game.gameStatus = new FinishedStatus(gameBoard);
-	    } else {
-	        game.gameStatus = new RedPlayerStatus(gameBoard);
-	    }
+		game.gameStatus = new RedPlayerStatus(gameBoard);
 		return this;
 	}
 	

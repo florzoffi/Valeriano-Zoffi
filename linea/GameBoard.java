@@ -17,26 +17,6 @@ public class GameBoard {
             grid.add(column);
         }
     }
-
-    
-    public boolean checkWin(int lastColumnPlayed, char colorPlayed, Line game) {
-        if (game.strategy == 'A') {
-            return horizontalWinCheck(lastColumnPlayed, colorPlayed, game) || verticalWinCheck(lastColumnPlayed, colorPlayed, game);
-        } else if (game.strategy == 'B') {
-            return diagonalBottomLeftToTopRightWinCheck(lastColumnPlayed, colorPlayed, game) || 
-            		diagonalTopLeftToBottomRightWinCheck(lastColumnPlayed, colorPlayed, game);
-        } else if (game.strategy == 'C') {
-            return horizontalWinCheck(lastColumnPlayed, colorPlayed, game) ||
-                   verticalWinCheck(lastColumnPlayed, colorPlayed, game) ||
-                   diagonalBottomLeftToTopRightWinCheck(lastColumnPlayed, colorPlayed, game) || 
-           		diagonalTopLeftToBottomRightWinCheck(lastColumnPlayed, colorPlayed, game);
-        } else {
-            throw new RuntimeException("Invalid strategy: " + game.strategy);
-        }
-    }
-    
-    
-    
     
 	public boolean isBoardFull() {
 		for (ArrayList<Character> column : grid) {
