@@ -16,13 +16,13 @@ public class LineaTest {
 	    assertEquals( 'A', game.strategy );
 	}
 	
-	@Test public void test04RedAlwaysPlaysFirst() {
+	@Test public void test02RedAlwaysPlaysFirst() {
 		Line game = new Line( 6, 7, 'A');
 		assertTrue( game.redTurn() );
 		assertFalse( game.blueTurn() );
 	}
 	
-	@Test public void test05TurnChangesWhenRedPlays() {
+	@Test public void test03TurnChangesWhenRedPlays() {
 		Line game = new Line( 6, 7, 'A' );
 		
 		game.playRedAt(3);
@@ -31,7 +31,7 @@ public class LineaTest {
 		assertFalse( game.redTurn() );
 	}
 	
-	@Test public void test06TurnChangesWhenBluePlays() {
+	@Test public void test04TurnChangesWhenBluePlays() {
 		Line game = new Line( 6, 7, 'A' );
 		
 		game.playRedAt(3);
@@ -41,7 +41,7 @@ public class LineaTest {
 		assertFalse( game.blueTurn() );
 	}
 	
-	@Test public void test07FailsIfBluePlaysInRedsTurn() {
+	@Test public void test05FailsIfBluePlaysInRedsTurn() {
 		Line game = new Line( 6, 7, 'A');
 		
 		assertThrows( RuntimeException.class, () -> game.playBlueAt(5) );
@@ -49,7 +49,7 @@ public class LineaTest {
 		assertTrue( game.redTurn() );
 	}
 	
-	@Test public void test08FailsIfRedPlaysInBluesTurn() {
+	@Test public void test06FailsIfRedPlaysInBluesTurn() {
 		Line game = new Line( 6, 7, 'A' );
 		 
 		game.playRedAt(3);
@@ -59,7 +59,7 @@ public class LineaTest {
 		assertFalse( game.redTurn() );
 	}
 	
-	@Test public void test09FailIfInvalidColumnIsPlayed() {
+	@Test public void test07FailIfInvalidColumnIsPlayed() {
 		Line game = new Line( 6, 7, 'A' );
 		
 		assertThrows( RuntimeException.class, () -> game.playRedAt(8) );
@@ -70,7 +70,7 @@ public class LineaTest {
 		
 	}
 	
-	@Test public void test10FailIfColumnIsFull() {
+	@Test public void test8FailIfColumnIsFull() {
 		Line game = new Line( 6, 4, 'A' );
 		
 		game.playRedAt(3);
@@ -84,7 +84,7 @@ public class LineaTest {
 		System.out.println(game.show());
 	}
 	
-	@Test public void test11GameFinishedWhenVerticalWin() {
+	@Test public void test9GameFinishedWhenVerticalWin() {
 		Line game = new Line( 6, 7, 'A' );
 		
 		game.playRedAt(3);
@@ -99,7 +99,7 @@ public class LineaTest {
 		assertTrue( game.finished() );
 	}
 	
-	@Test public void test12GameFinishesWhenDiagonalBottomLeftToTopRightWin() {
+	@Test public void test10GameFinishesWhenDiagonalBottomLeftToTopRightWin() {
 		Line game = new Line( 6, 7, 'B' );
 		
 		game.playRedAt(1);
@@ -118,7 +118,7 @@ public class LineaTest {
 		assertTrue( game.finished() );
 	}
 	
-	@Test public void test13GameFinishesWhenDiagonalTopLeftToBottomRightWin() {
+	@Test public void test11GameFinishesWhenDiagonalTopLeftToBottomRightWin() {
 		Line game = new Line( 6, 7, 'B' );
 		
 		game.playRedAt(5);
@@ -137,7 +137,7 @@ public class LineaTest {
 		assertTrue( game.finished() );
 	}
 	
-	@Test public void test14GameFinishesWhenHorizontalWin() {
+	@Test public void test12GameFinishesWhenHorizontalWin() {
 		Line game = new Line( 6, 7, 'A' );
 		
 		game.playRedAt(0);
@@ -152,7 +152,7 @@ public class LineaTest {
 		assertTrue( game.finished() );
 	}
 	
-	@Test public void test15GameFinishesWhenDraw() {
+	@Test public void test13GameFinishesWhenDraw() {
 		Line game = new Line( 4, 4, 'A' );
 		
 		game.playRedAt(0);
@@ -176,7 +176,7 @@ public class LineaTest {
 		assertTrue( game.finished() );
 	}
 	
-	@Test public void test16GameDoesNotFinishIfNoWinOrDraw() {
+	@Test public void test14GameDoesNotFinishIfNoWinOrDraw() {
 		Line game = new Line( 4, 4, 'A' );
 		
 		game.playRedAt(0);
@@ -184,7 +184,7 @@ public class LineaTest {
 
 		assertFalse( game.finished() );
 	}
-	@Test public void test17CannotWinWithDiagonalInStrategyA() {
+	@Test public void test15CannotWinWithDiagonalInStrategyA() {
 		Line game = new Line( 6, 7, 'A' );
 		
 		game.playRedAt(5);
@@ -201,7 +201,7 @@ public class LineaTest {
 		
 		assertFalse( game.finished() );
 	}
-	@Test public void test18CannotHaveAVerticalWinInStrategyB() {
+	@Test public void test16CannotHaveAVerticalWinInStrategyB() {
 		Line game = new Line( 6, 7, 'B' );
 		
 		game.playRedAt(3);
@@ -215,7 +215,7 @@ public class LineaTest {
 		assertFalse( game.finished() );
 	}
 	
-	@Test public void test19GCannotHaveAHorizontalWinInStrategyB() {
+	@Test public void test17GCannotHaveAHorizontalWinInStrategyB() {
 		Line game = new Line( 6, 7, 'B' );
 		
 		game.playRedAt(0);
@@ -230,7 +230,7 @@ public class LineaTest {
 	}
 	
 
-	@Test public void test20CanWinWithDiaonalInStrategyC() {
+	@Test public void test18CanWinWithDiaonalInStrategyC() {
 		Line game = new Line( 6, 7, 'C' );
 		
 		game.playRedAt(5);
@@ -247,7 +247,7 @@ public class LineaTest {
 	
 		assertTrue( game.finished() );
 	}
-	@Test public void test21CanHaveAVerticalWinInStrategyC() {
+	@Test public void test19CanHaveAVerticalWinInStrategyC() {
 		Line game = new Line( 6, 7, 'C' );
 		
 		game.playRedAt(3);
@@ -261,7 +261,7 @@ public class LineaTest {
 		assertTrue( game.finished() );
 	}
 	
-	@Test public void test22GCanHaveAHorizontalWinInStrategyC() {
+	@Test public void test20GCanHaveAHorizontalWinInStrategyC() {
 		Line game = new Line( 6, 7, 'C' );
 		
 		game.playRedAt(0);
@@ -273,8 +273,6 @@ public class LineaTest {
 		game.playRedAt(3);
 	
 		assertTrue( game.finished() );
-	}
-		
-		
+	}	
 		
 	}
