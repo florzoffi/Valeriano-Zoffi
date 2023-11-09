@@ -1,7 +1,6 @@
 package linea;
 
 public class RedPlayerStatus extends GameStatus {
-	private Line game;
 	private GameBoard gameBoard;
 	int lastPlayedColumn;
 	int lastPlayedRow;
@@ -12,44 +11,29 @@ public class RedPlayerStatus extends GameStatus {
 	}
 
 	@Override
-	public GameStatus playRedAt(Line game, GameBoard gameBoard, int column) {
-        if (column < 0 || column >= gameBoard.getNumColumns() || gameBoard.isColumnFull(column)) {
-        	setTurn();
-            throw new RuntimeException("Invalid move. Your turn has been lost");
-        }
+	public GameStatus playRedAt(Line game, int column) {
+		gameBoard.placeChip(column, 'R');
+		
+		game.gameStatus = new BluePlayerStatus(gameBoard);
+		
+		gameBoard.verticalWinCheck(column, 'R', game); // todos los otros checks abajo
+		
+		return this;
 
-        gameBoard.placeChip(column, 'R');
-        lastPlayedColumn = column;
-        lastPlayedRow = gameBoard.getColumnHeight(column);
-        
-        if (isGameFinished()) {
-        	return game.gameStatus = new FinishedStatus(gameBoard);
-        }
-        return game.gameStatus = new BluePlayerStatus(gameBoard);
-	}
+     	}
 	
 	@Override
-	public GameStatus playBlueAt(Line game, GameBoard gameBoard, int column) {
+	public GameStatus playBlueAt(Line game, int column) {
 		throw new RuntimeException("It's not the players turn.");
 	}
 
 	@Override
 	public boolean isGameFinished() {
-		if (gameBoard.checkHorizontalWin('R') || gameBoard.checkVerticalWin('R') ||
-	            gameBoard.checkDiagonalWin('R', lastPlayedRow, lastPlayedColumn)) {
-			game.gameStatus = new FinishedStatus(gameBoard);
-	            return true; 
-	        }
 		return false;
 	}
 
 	@Override
 	public char isTurn() {
 		return 'R';
-	}
-
-	@Override
-	public void setTurn() {
-		game.gameStatus = new RedPlayerStatus(gameBoard);
 	}
 }

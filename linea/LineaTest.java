@@ -11,17 +11,9 @@ public class LineaTest {
 	@Test public void test01SetDimensionsForGame() {
 		Line game = new Line( 6, 7, ' ' );
 
-	    assertEquals( 6, game.base );
-	    assertEquals( 7, game.height );
+	    assertEquals( 6, game.height );
+	    assertEquals( 7, game.base );
 	    assertEquals( ' ', game.c );
-	}
-	
-	@Test public void test02FailsIfHeightIsLessThanFour() {
-		assertThrows( RuntimeException.class, () -> new Line(6, 3, ' ') );
-	}
-	
-	@Test public void test03FailsIfBaseIsLessThanFour() {
-		assertThrows( RuntimeException.class, () -> new Line(2, 5, ' ') );
 	}
 	
 	@Test public void test04RedAlwaysPlaysFirst() {
@@ -67,15 +59,16 @@ public class LineaTest {
 		assertFalse( game.redTurn() );
 	}
 	
-	@Test public void test09TurnIsLostWhenInvalidColumnIsPlayed() {
+	@Test public void test09FailIfInvalidColumnIsPlayed() {
 		Line game = new Line( 6, 7, ' ' );
 		
 		assertThrows( RuntimeException.class, () -> game.playRedAt(8) );
-		assertTrue( game.blueTurn() );
-		assertFalse( game.redTurn() );
+		assertFalse( game.blueTurn() );
+		assertTrue( game.redTurn() );
+		System.out.println(game.show()); // Fijarme que no haya puesto el chip
 	}
 	
-	@Test public void test10TurnIsLostIfColumnIsFull() {
+	@Test public void test10FailIfColumnIsFull() {
 		Line game = new Line( 6, 4, ' ' );
 		
 		game.playRedAt(3);
@@ -85,8 +78,6 @@ public class LineaTest {
 		game.playRedAt(3);
 		
 		assertThrows( RuntimeException.class, () -> game.playBlueAt(3) );
-		assertTrue( game.redTurn() );
-		assertFalse( game.blueTurn() );
 	}
 	
 	@Test public void test11GameFinishedWhenVerticalWin() {

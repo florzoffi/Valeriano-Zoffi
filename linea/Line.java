@@ -7,9 +7,9 @@ public class Line {
 	private GameBoard gameBoard;
 	public GameStatus gameStatus;
 
-	public Line (int base, int height, char c) {
-		this.base = base;
+	public Line (int height, int base, char c) {
 		this.height = height;
+		this.base = base;
 		this.c = c;
 		
 		gameBoard = new GameBoard(base, height);
@@ -26,12 +26,12 @@ public class Line {
 
 	
 	public Line playBlueAt(int column) {
-        gameStatus.playBlueAt(this, gameBoard, column);
+        gameStatus.playBlueAt(this, column);
         return this;
     }
 
 	public Line playRedAt(int column) {
-        gameStatus.playRedAt(this, gameBoard, column);
+        gameStatus.playRedAt(this, column);
         return this;
 	}
 	
