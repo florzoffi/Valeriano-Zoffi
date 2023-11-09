@@ -3,14 +3,14 @@ package linea;
 public class Line {
 	public int base;
 	public int height;
-	public char c;
+	public char strategy;
 	private GameBoard gameBoard;
 	public GameStatus gameStatus;
 
-	public Line (int height, int base, char c) {
+	public Line (int height, int base, char strategy) {
 		this.height = height;
 		this.base = base;
-		this.c = c;
+		this.strategy = strategy;
 		
 		gameBoard = new GameBoard(base, height);
         gameStatus = new RedPlayerStatus(gameBoard);
@@ -43,4 +43,6 @@ public class Line {
 		return gameStatus.isTurn() == 'B';
 	}
 
+
 }
+	
