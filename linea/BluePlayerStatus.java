@@ -14,10 +14,12 @@ public class BluePlayerStatus extends GameStatus {
 	public GameStatus playBlueAt(Line game, int column) {
 		gameBoard.placeChip(column, 'B');
 		
-		game.gameStatus = new RedPlayerStatus(gameBoard);
 		
-		gameBoard.verticalWinCheck(column, 'B', game); // todos los otros checks abajo
-		
+	    if (gameBoard.checkWin(column, 'B', game) || gameBoard.isDraw(game)) {
+	        game.gameStatus = new FinishedStatus(gameBoard);
+	    } else {
+	        game.gameStatus = new RedPlayerStatus(gameBoard);
+	    }
 		return this;
 	}
 	
