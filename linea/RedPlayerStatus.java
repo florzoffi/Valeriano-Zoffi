@@ -14,10 +14,11 @@ public class RedPlayerStatus extends GameStatus {
 	public GameStatus playRedAt(Line game, int column) {
 		gameBoard.placeChip(column, 'R');
 		
-		game.gameStatus = new BluePlayerStatus(gameBoard);
-		
-		gameBoard.verticalWinCheck(column, 'R', game); // todos los otros checks abajo
-		
+	    if (gameBoard.checkWin(column, 'R', game) || gameBoard.isDraw(game)) {
+	        game.gameStatus = new FinishedStatus(gameBoard);
+	    } else {
+	        game.gameStatus = new BluePlayerStatus(gameBoard);
+	    }
 		return this;
 
      	}
@@ -31,6 +32,12 @@ public class RedPlayerStatus extends GameStatus {
 	public boolean isGameFinished() {
 		return false;
 	}
+
+	@Override
+	public char isTurn() {
+		return 'R';
+	}
+}
 
 	@Override
 	public char isTurn() {
