@@ -44,4 +44,8 @@ public class Line {
 	public boolean blueTurn() {
 		return gameStatus.isTurn() == 'B';
 	}
+	
+	public char winner() {
+		return FinishedInWin.getWinner();
+	}
 }
