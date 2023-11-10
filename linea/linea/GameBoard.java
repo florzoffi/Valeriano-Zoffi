@@ -1,11 +1,14 @@
 package linea;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class GameBoard {
     private ArrayList<ArrayList<Character>> grid;
     private int height;
     private int base;
+    static String winner;
 
     public GameBoard(int height, int base) {
         this.height = height;
@@ -92,21 +95,16 @@ public class GameBoard {
 	}
 
 	public boolean verticalWinCheck(int lastColumnPlayed, char colorPlayed, Line game) {
-		ArrayList<Character> column = grid.get(lastColumnPlayed);
-		int consecutiveCount = 1;
-		
-		for (int i = column.size() - 2; i >= 0; i--) {
-	        if (column.get(i) == colorPlayed) {
-	            consecutiveCount++;
-	            if (consecutiveCount == 4) {
-	            	game.gameStatus = new FinishedStatus(this);
-	                return true; // Vertical win found
-	            }
-	        } else {
-	            break; // Break the loop if a different color is encountered
-	        }
-	    }
+	    ArrayList<Character> column = grid.get(lastColumnPlayed);
 
+	    long consecutiveCount = IntStream.range(0, column.size() - 1)
+	            .takeWhile(i -> column.get(i) == colorPlayed)
+	            .count();
+
+	    if (consecutiveCount >= 3) {
+	        game.gameStatus = new FinishedInWin(this, colorPlayed);
+	        return true; // Vertical win found
+	    }
 	    return false;
 	}
 	
@@ -114,21 +112,16 @@ public class GameBoard {
 	    ArrayList<Character> column = grid.get(lastColumnPlayed);
 	    int consecutiveCount = 1;
 
-	    // Check to the left and right
-	    int[] directions = { -1, 1 }; // Left and right directions
+	    int[] directions = {-1, 1}; // Left and right directions
 
-	    for (int direction : directions) {
-	        for (int i = lastColumnPlayed + direction; i >= 0 && i < base; i += direction) {
-	            if (grid.get(i).size() > column.size() - 1 && grid.get(i).get(column.size() - 1) == colorPlayed) {
-	                consecutiveCount++;
-	                if (consecutiveCount == 4) {
-	                    game.gameStatus = new FinishedStatus(this);
-	                    return true; // Horizontal win found
-	                }
-	            } else {
-	                break; // Break the loop if a different color is encountered or the column is not as tall
-	            }
-	        }
+	    consecutiveCount += Arrays.stream(directions)
+	            .flatMap(direction -> IntStream.iterate(lastColumnPlayed + direction, i -> i >= 0 && i < base, i -> i + direction))
+	            .filter(i -> grid.get(i).size() > column.size() - 1 && grid.get(i).get(column.size() - 1) == colorPlayed)
+	            .count();
+
+	    if (consecutiveCount >= 4) {
+	        game.gameStatus = new FinishedInWin(this, colorPlayed);
+	        return true; // Horizontal win found
 	    }
 
 	    return false;
@@ -161,7 +154,7 @@ public class GameBoard {
 	    }
 
 	    if (consecutiveCount >= 4) {
-	        game.gameStatus = new FinishedStatus(this);
+	        game.gameStatus = new FinishedInWin(this, colorPlayed);
 	        return true; // Diagonal win found
 	    }
 
@@ -194,7 +187,7 @@ public class GameBoard {
 	    }
 
 	    if (consecutiveCount >= 4) {
-	        game.gameStatus = new FinishedStatus(this);
+	        game.gameStatus = new FinishedInWin(this, colorPlayed);
 	        return true; // Diagonal win found
 	    }
 
@@ -202,10 +195,11 @@ public class GameBoard {
 	}
 	public boolean isDraw(Line game) {
 		if (isBoardFull()) {
-			game.gameStatus = new FinishedStatus(this);
+			game.gameStatus = new FinishedInDraw(this);
 			return true;
 		}
 		return false;
 	   
 	}
 }
+
