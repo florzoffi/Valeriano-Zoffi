@@ -32,4 +32,4 @@ public class RedPlayerStatus extends GameStatus {
 	public char isTurn() {
 		return 'R';
 	}
-}
+} 
