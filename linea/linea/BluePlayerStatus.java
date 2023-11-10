@@ -31,4 +31,4 @@ public class BluePlayerStatus extends GameStatus {
 	public char isTurn() {
 		return 'B';
 	}	
-}
+} 
