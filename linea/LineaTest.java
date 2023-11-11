@@ -37,7 +37,6 @@ public class LineaTest {
 		Line game = gameSet( 6, 7, 'A' );
 		assertThrows( RuntimeException.class, () -> game.playBlueAt(5) );
 		turnCheck( game.redTurn() ,game.blueTurn() );
-	
 	}
 	
 	@Test public void test06FailsIfRedPlaysInBluesTurn() {
@@ -58,7 +57,6 @@ public class LineaTest {
 		assertThrows( RuntimeException.class, () -> game.playRedAt(8) );
 		turnCheck(game.redTurn() ,game.blueTurn() );
 		consolePrints(game, "Test 8: Invalid column");
-		
 	}
 
 	@Test public void test09FailIfColumnIsFull() {
@@ -91,11 +89,23 @@ public class LineaTest {
 		game.playBlueAt(4);
 		game.playRedAt(3);
 		consolePrints(game, "Test 11: vertical win");
-		assertTrue( game.finished() );
-		assertEquals('R', game.winner());
+		gameFinishedAndThisIsWinner(game, 'R');
 	}
-	
-	@Test public void test12GameFinishesWhenDiagonalBottomLeftToTopRightWin() {
+
+	@Test public void test12BlueCanAlsoWin() {
+		Line game = gameSet(6, 7, 'A' );
+		
+		game.playRedAt(0);
+		game.playBlueAt(3);
+		game.playRedAt(1);
+		game.playBlueAt(3);
+		game.playRedAt(1);
+		game.playBlueAt(3);
+		game.playRedAt(4);
+		game.playBlueAt(3);
+		gameFinishedAndThisIsWinner(game, 'B');
+	}
+	@Test public void test13GameFinishesWhenDiagonalBottomLeftToTopRightWin() {
 		Line game = gameSet(6, 7, 'B' );
 		
 		game.playRedAt(1);
@@ -110,11 +120,10 @@ public class LineaTest {
 		game.playBlueAt(1);
 		game.playRedAt(4);
 		consolePrints(game, "Test 12: Diagonal bottom left to top right win");
-		assertTrue( game.finished() );
-		assertEquals('R', game.winner());
+		gameFinishedAndThisIsWinner(game, 'R');
 	}
 	
-	@Test public void test13GameFinishesWhenDiagonalTopLeftToBottomRightWin() {
+	@Test public void test14GameFinishesWhenDiagonalTopLeftToBottomRightWin() {
 		Line game = gameSet(6, 7, 'B' );
 		
 		game.playRedAt(5);
@@ -129,11 +138,10 @@ public class LineaTest {
 		game.playBlueAt(5);
 		game.playRedAt(2);
 		consolePrints(game, "Test 13: Diagonal Top left to bottom right win");
-		assertTrue( game.finished() );
-		assertEquals('R', game.winner());
+		gameFinishedAndThisIsWinner(game, 'R');
 	}
 	
-	@Test public void test14GameFinishesWhenHorizontalWin() {
+	@Test public void test15GameFinishesWhenHorizontalWin() {
 		Line game = gameSet(6, 7, 'A' );
 		
 		game.playRedAt(0);
@@ -145,11 +153,10 @@ public class LineaTest {
 		game.playRedAt(3);
 	
 		consolePrints(game, "Test 14: Horizontal win");
-		assertTrue( game.finished() );
-		assertEquals('R', game.winner());
+		gameFinishedAndThisIsWinner(game, 'R');
 	}
 	
-	@Test public void test15GameFinishesWhenDraw() {
+	@Test public void test16GameFinishesWhenDraw() {
 		Line game = gameSet(4, 4, 'A' );
 		
 		game.playRedAt(0);
@@ -172,7 +179,7 @@ public class LineaTest {
 		assertTrue( game.finished() );
 	}
 	
-	@Test public void test16GameDoesNotFinishIfNoWinOrDraw() {
+	@Test public void test17GameDoesNotFinishIfNoWinOrDraw() {
 		Line game = gameSet(4, 4, 'A' );
 		
 		game.playRedAt(0);
@@ -181,7 +188,7 @@ public class LineaTest {
 		assertFalse( game.finished() );
 		
 	}
-	@Test public void test17CannotWinWithDiagonalInStrategyA() {
+	@Test public void test18CannotWinWithDiagonalInStrategyA() {
 		Line game = gameSet(6, 7, 'A' );
 		
 		game.playRedAt(5);
@@ -198,7 +205,7 @@ public class LineaTest {
 		
 		assertFalse( game.finished() );
 	}
-	@Test public void test18CannotHaveAVerticalWinInStrategyB() {
+	@Test public void test19CannotHaveAVerticalWinInStrategyB() {
 		Line game = gameSet(6, 7, 'B' );
 		
 		game.playRedAt(3);
@@ -212,7 +219,7 @@ public class LineaTest {
 		assertFalse( game.finished() );
 	}
 	
-	@Test public void test19CannotHaveAHorizontalWinInStrategyB() {
+	@Test public void test20CannotHaveAHorizontalWinInStrategyB() {
 		Line game = gameSet(6, 7, 'B' );
 		
 		game.playRedAt(0);
@@ -227,7 +234,7 @@ public class LineaTest {
 	}
 	
 
-	@Test public void test20CanWinWithDiagonalInStrategyC() {
+	@Test public void test21CanWinWithDiagonalInStrategyC() {
 		Line game = gameSet(6, 7, 'C' );
 		
 		game.playRedAt(5);
@@ -245,7 +252,7 @@ public class LineaTest {
 		assertTrue( game.finished() );
 		assertEquals( "The game has ended with a winner: R", game.endMessage() );
 	}
-	@Test public void test21CanHaveAVerticalWinInStrategyC() {
+	@Test public void test22CanHaveAVerticalWinInStrategyC() {
 		Line game = gameSet(6, 7, 'C' );
 		
 		game.playRedAt(3);
@@ -260,7 +267,7 @@ public class LineaTest {
 		assertEquals( "The game has ended with a winner: R", game.endMessage() );
 	}
 	
-	@Test public void test22CanHaveAHorizontalWinInStrategyC() {
+	@Test public void test23CanHaveAHorizontalWinInStrategyC() {
 		Line game = gameSet(6, 7, 'C' );
 		
 		game.playRedAt(0);
@@ -274,27 +281,32 @@ public class LineaTest {
 		assertTrue( game.finished() );
 	}	
 	
-	@Test public void test23FailIfAskForWinnerWhenNoWin() {
+	@Test public void test24FailIfAskForWinnerWhenNoWin() {
 		assertThrows( RuntimeException.class, ()-> gameSet(6, 7, 'C').winner() );
 	}
 	
-	@Test public void test24FailIfAskForEndMessageWhenNoWin() {
+	@Test public void test25FailIfAskForEndMessageWhenNoWin() {
 		assertThrows( RuntimeException.class, ()-> gameSet(6, 7, 'C').endMessage() );
 	}
 		
+		
+	private void turnCheck(boolean isTurn,boolean isNotTurn) {
+		assertTrue( isTurn );
+		assertFalse( isNotTurn );
+	}
 	
-private void turnCheck(boolean isTurn,boolean isNotTurn) {
-	assertTrue( isTurn );
-	assertFalse( isNotTurn );
-}
-
-private void consolePrints(Line game, String reference) {
-	System.out.println(reference);
-	System.out.println(game.show());
-}
-private Line gameSet(int base, int height, char strategy) {
-	Line game = new Line( base, height, strategy );
-	return game;
-}
-
-}
+	private void consolePrints(Line game, String reference) {
+		System.out.println(reference);
+		System.out.println(game.show());
+	}
+	private Line gameSet(int base, int height, char strategy) {
+		Line game = new Line( base, height, strategy );
+		return game;
+	}
+	
+	private void gameFinishedAndThisIsWinner(Line game, char winner) {
+		assertTrue( game.finished() );
+		assertEquals(winner, game.winner());
+	}
+	
+	}
