@@ -7,13 +7,13 @@ public class Line {
 	private GameBoard gameBoard;
 	public GameStatus gameStatus;
 
-	public Line (int height, int base, char strategy) {
+	public Line ( int height, int base, char strategy ) {
 		this.height = height;
 		this.base = base;
 		this.strategy = strategy;
 		
-		gameBoard = new GameBoard(base, height);
-        gameStatus = new RedPlayerStatus(gameBoard);
+		gameBoard = new GameBoard( base, height );
+        gameStatus = new RedPlayerStatus( gameBoard );
 	}
 
 	public boolean finished() {
@@ -25,15 +25,15 @@ public class Line {
 	}
 
 	
-	public Line playBlueAt(int column) {
-        gameStatus.playBlueAt(this, column);
-        Strategy.strategyFor(strategy).checkWin(column, 'B', this, gameBoard);
+	public Line playBlueAt( int column ) {
+        gameStatus.playBlueAt( this, column );
+        Strategy.strategyFor( strategy ).checkWin( column, 'B', this, gameBoard );
         return this;
     }
 
 	public Line playRedAt(int column) {
         gameStatus.playRedAt(this, column);
-        Strategy.strategyFor(strategy).checkWin(column, 'R', this, gameBoard);
+        Strategy.strategyFor( strategy ).checkWin( column, 'R', this, gameBoard );
         return this;
 	}
 	
@@ -46,7 +46,10 @@ public class Line {
 	}
 	
 	public char winner() {
-		return FinishedInWin.getWinner();
+		return gameStatus.getWinner();
+	}
+	
+	public String endMessage() {
+		return gameStatus.getEndMessage();
 	}
 }
-

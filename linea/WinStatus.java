@@ -1,10 +1,9 @@
 package linea;
 
 public class WinStatus extends GameStatus {
-    private static char winner;
-   
+    private char winner;
 
-    public WinStatus(GameBoard gameBoard, char winner) {
+    public WinStatus( GameBoard gameBoard, char winner ) {
         super();
         this.winner = winner;
     }
@@ -15,13 +14,13 @@ public class WinStatus extends GameStatus {
     }
 
     @Override
-    public GameStatus playRedAt(Line game, int column) {
-        throw new RuntimeException("The game has ended.");
+    public GameStatus playRedAt( Line game, int column ) {
+        throw new RuntimeException( gameEnded );
     }
 
     @Override
     public GameStatus playBlueAt(Line game, int column) {
-        throw new RuntimeException("The game has ended.");
+        throw new RuntimeException( gameEnded );
     }
 
     @Override
@@ -29,7 +28,12 @@ public class WinStatus extends GameStatus {
         return true;
     }
 
-    public static char getWinner() {
+    public char getWinner() {
         return winner;
     }
+
+	@Override
+	public String getEndMessage() {
+		return "The game has ended with a winner: " + winner;
+	}
 }

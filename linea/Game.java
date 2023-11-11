@@ -1,8 +1,8 @@
 package linea;
 
 public class Game {
-	  public static void main( String[] args) throws Exception {
-	    System.out.println( "Dimensiones?");
+	  public static void main( String[] args ) throws Exception {
+	    System.out.println( "Dimensiones?" );
 	    Line game = new Line( promptAsInt( "Base? " ), 
 	                            promptAsInt( "Altura? " ), 
 	                            promptAsChar( "Estartegia de Juego: A, B o C? " ) );

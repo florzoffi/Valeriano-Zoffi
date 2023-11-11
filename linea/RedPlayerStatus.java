@@ -5,22 +5,22 @@ public class RedPlayerStatus extends GameStatus {
 	int lastPlayedColumn;
 	int lastPlayedRow;
 	
-	public RedPlayerStatus(GameBoard gameBoard) {
+	public RedPlayerStatus( GameBoard gameBoard ) {
 		super();
         this.gameBoard = gameBoard;
 	}
 
 	@Override
-	public GameStatus playRedAt(Line game, int column) {
-		gameBoard.placeChip(column, 'R');
-		game.gameStatus = new BluePlayerStatus(gameBoard);
+	public GameStatus playRedAt( Line game, int column ) {
+		gameBoard.placeChip( column, 'R' );
+		game.gameStatus = new BluePlayerStatus( gameBoard );
 		return this;
 
      	}
 	
 	@Override
-	public GameStatus playBlueAt(Line game, int column) {
-		throw new RuntimeException("It's not the players turn.");
+	public GameStatus playBlueAt( Line game, int column ) {
+		throw new RuntimeException( notPlayerTurn );
 	}
 
 	@Override
@@ -32,4 +32,14 @@ public class RedPlayerStatus extends GameStatus {
 	public char isTurn() {
 		return 'R';
 	}
-}
+
+	@Override
+	public char getWinner() {
+		throw new RuntimeException( NoWinnerYet );
+	}
+
+	@Override
+	public String getEndMessage() {
+		throw new RuntimeException( NoWinnerYet );
+	}
+} 

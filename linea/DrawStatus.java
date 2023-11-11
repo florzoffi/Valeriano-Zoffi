@@ -1,7 +1,8 @@
 package linea;
 
 public class DrawStatus extends GameStatus {
-    public DrawStatus(GameBoard gameBoard) {
+
+	public DrawStatus( GameBoard gameBoard ) {
         super();
     }
 
@@ -11,21 +12,27 @@ public class DrawStatus extends GameStatus {
     }
 
     @Override
-    public GameStatus playRedAt(Line game, int column) {
-        throw new RuntimeException("The game has ended.");
+    public GameStatus playRedAt( Line game, int column ) {
+        throw new RuntimeException( gameEnded );
     }
 
     @Override
-    public GameStatus playBlueAt(Line game, int column) {
-        throw new RuntimeException("The game has ended.");
+    public GameStatus playBlueAt( Line game, int column ) {
+        throw new RuntimeException( gameEnded );
     }
 
     @Override
     public boolean isGameFinished() {
         return true;
     }
-
+    
+    @Override
     public String getEndMessage() {
-        return "The game ended in a draw!";
+        return gameEndedInDraw ;
     }
+
+	@Override
+	public char getWinner() {
+		throw new RuntimeException( gameEndedInDraw );
+	}
 }
