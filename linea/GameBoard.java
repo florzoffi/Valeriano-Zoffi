@@ -102,7 +102,7 @@ public class GameBoard {
 	            .count();
 
 	    if (consecutiveCount >= 3) {
-	        game.gameStatus = new WinStatus(this, colorPlayed);
+	        game.gameStatus = new FinishedInWin(this, colorPlayed);
 	        return true; // Vertical win found
 	    }
 	    return false;
@@ -120,7 +120,7 @@ public class GameBoard {
 	            .count();
 
 	    if (consecutiveCount >= 4) {
-	        game.gameStatus = new WinStatus(this, colorPlayed);
+	        game.gameStatus = new FinishedInWin(this, colorPlayed);
 	        return true; // Horizontal win found
 	    }
 
@@ -154,7 +154,7 @@ public class GameBoard {
 	    }
 
 	    if (consecutiveCount >= 4) {
-	        game.gameStatus = new WinStatus(this, colorPlayed);
+	        game.gameStatus = new FinishedInWin(this, colorPlayed);
 	        return true; // Diagonal win found
 	    }
 
@@ -187,7 +187,7 @@ public class GameBoard {
 	    }
 
 	    if (consecutiveCount >= 4) {
-	        game.gameStatus = new WinStatus(this, colorPlayed);
+	        game.gameStatus = new FinishedInWin(this, colorPlayed);
 	        return true; // Diagonal win found
 	    }
 
@@ -195,10 +195,12 @@ public class GameBoard {
 	}
 	public boolean isDraw(Line game) {
 		if (isBoardFull()) {
-			game.gameStatus = new DrawStatus(this);
+			game.gameStatus = new FinishedInDraw(this);
 			return true;
 		}
 		return false;
 	   
 	}
 }
+
+

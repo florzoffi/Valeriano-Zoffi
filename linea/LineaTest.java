@@ -1,8 +1,11 @@
 package linea;
 
+
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +19,13 @@ public class LineaTest {
 	    assertEquals( 'A', game.strategy );
 	}
 
+	
 	@Test public void test02RedAlwaysPlaysFirst() {
 		Line game = gameSet(6, 7, 'A' );
 		turnCheck(game.redTurn(), game.blueTurn());
 	}
+
+	
 	
 	@Test public void test03TurnChangesWhenRedPlays() {
 		Line game = gameSet(6, 7, 'A' );
@@ -32,12 +38,14 @@ public class LineaTest {
 		game.playRedAt(3);
 		game.playBlueAt(4);
 		turnCheck(game.redTurn() ,game.blueTurn() );
+	
 	}
 	
 	@Test public void test05FailsIfBluePlaysInRedsTurn() {
 		Line game = gameSet(6, 7, 'A' );
 		assertThrows( RuntimeException.class, () -> game.playBlueAt(5) );
 		turnCheck(game.redTurn() ,game.blueTurn() );
+	
 	}
 	
 	@Test public void test06FailsIfRedPlaysInBluesTurn() {
@@ -55,7 +63,7 @@ public class LineaTest {
 		
 	}
 
-	@Test public void test08FailIfColumnIsFull() {
+	@Test public void test8FailIfColumnIsFull() {
 		Line game = gameSet(6, 4, 'A' );
 		
 		game.playRedAt(3);
@@ -68,7 +76,7 @@ public class LineaTest {
 		consolePrints(game, "Test 8: Full column");
 	}
 	
-	@Test public void test09GameFinishedWhenVerticalWin() {
+	@Test public void test9GameFinishedWhenVerticalWin() {
 		Line game = gameSet(6, 7, 'A' );
 		
 		game.playRedAt(3);

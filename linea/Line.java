@@ -46,6 +46,7 @@ public class Line {
 	}
 	
 	public char winner() {
-		return WinStatus.getWinner();
+		return FinishedInWin.getWinner();
 	}
 }
+
