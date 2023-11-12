@@ -12,7 +12,7 @@ public abstract class Strategy {
         ).stream()
                 .filter(strat -> strat.matches( strategy ))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Unknown strategy: " + strategy));
+                .orElseThrow(() -> new RuntimeException("Unknown strategy: " + strategy));
     }
 
     abstract boolean matches( char strategy );
